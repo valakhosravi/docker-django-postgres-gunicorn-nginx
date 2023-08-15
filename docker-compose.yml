@@ -10,6 +10,18 @@ services:
       - 8000:8000
     env_file:
       - ./.env.dev
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app/:/usr/src/app/
+      - node_modules:/usr/src/app/node_modules
+      - /usr/src/app/.next
+    env_file:
+      - ./.env.dev
   db:
     image: postgres:15
     volumes:
@@ -23,3 +35,4 @@ services:
 
 volumes:
   postgres_data:
+  node_modules:
